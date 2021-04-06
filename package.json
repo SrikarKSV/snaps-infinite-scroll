@@ -7,6 +7,9 @@
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
+  "targets": {
+    "main": false
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SrikarKSV/snaps-infinite-scroll.git"
