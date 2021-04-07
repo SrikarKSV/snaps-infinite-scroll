@@ -70,11 +70,25 @@ header {
 .results {
   background-color: var(--secondary-bg-color);
   overflow: auto;
-  margin-top: 2rem;
+  margin: 2rem 0;
   border-radius: var(--border-radius-lg);
   min-height: 20rem;
 
   h3 {
     text-align: center;
+  }
+
+  .img-grid {
+    padding: 0 15px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    justify-items: center;
+    gap: 20px;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
