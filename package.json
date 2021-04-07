@@ -37,5 +37,8 @@
     "> 1%",
     "not dead",
     "last 2 versions"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
