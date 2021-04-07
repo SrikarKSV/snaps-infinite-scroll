@@ -3,6 +3,9 @@
   --primary-bg-color: #0e141b;
   --white: #fff;
   --red: #ff0041;
+  --logo-color: #5773ff;
+  --border-radius-sm: 3px;
+  --border-radius-lg: 5px;
 }
 
 * {
@@ -16,11 +19,11 @@ html {
 } /*16px*/
 
 body {
-  background: var(--secondary-bg-color);
+  background: var(--primary-bg-color);
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.75;
-  color: #fff;
+  color: var(--white);
 }
 
 p {
@@ -65,7 +68,21 @@ small,
 }
 
 button,
-input {
+input,
+label {
   border: none;
   font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  display: block;
+}
+
+.button {
+  padding: 0.3em 0.6em;
+  border-radius: var(--border-radius-sm);
 }
