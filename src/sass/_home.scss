@@ -1,0 +1,80 @@
+header {
+  background-color: var(--secondary-bg-color);
+}
+
+.header,
+.main {
+  max-width: 1300px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    padding-top: 10px;
+
+    .logo {
+      color: var(--logo-color);
+      text-decoration: none;
+
+      h1 {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__right {
+    padding-top: 10px;
+
+    button {
+      background: transparent;
+      width: 45px;
+      height: 45px;
+      margin-right: 20px;
+
+      svg {
+        fill: var(--white);
+      }
+    }
+  }
+}
+
+.main {
+  margin-top: 2rem;
+
+  &__form {
+    label {
+      font-size: 2rem;
+    }
+
+    input {
+      font-size: 1.1rem;
+      padding: 3px 5px;
+      width: 25rem;
+      margin: 0.3rem 0 0.5rem;
+      border-radius: var(--border-radius-sm);
+    }
+
+    .button--search {
+      font-size: 1.3rem;
+      color: var(--white);
+      font-weight: 600;
+      background-color: var(--red);
+    }
+  }
+}
+
+.results {
+  background-color: var(--secondary-bg-color);
+  overflow: auto;
+  margin-top: 2rem;
+  border-radius: var(--border-radius-lg);
+  min-height: 20rem;
+
+  h3 {
+    text-align: center;
+  }
+}
