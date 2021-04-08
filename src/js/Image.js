@@ -21,6 +21,10 @@ export default class Image {
     return document.createRange().createContextualFragment(html);
   }
 
+  static resetPage() {
+    this.#page = 1;
+  }
+
   static async #fetchData(url) {
     const { data } = await axios.get(url, {
       headers: {
