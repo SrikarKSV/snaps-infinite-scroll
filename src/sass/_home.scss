@@ -74,7 +74,8 @@ header {
   border-radius: var(--border-radius-lg);
   min-height: 20rem;
 
-  h3 {
+  h3,
+  h4 {
     text-align: center;
   }
 
@@ -114,6 +115,10 @@ header {
       border-radius: 50%;
       animation: pulse 2s linear infinite;
     }
+  }
+
+  .intersection-observer {
+    height: 10px;
   }
 }
 
