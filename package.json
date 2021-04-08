@@ -4,7 +4,7 @@
   "description": "Infinite image scroll which can be bookmarked",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html --no-cache",
     "build": "parcel build index.html"
   },
   "targets": {
