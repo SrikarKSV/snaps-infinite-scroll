@@ -1,4 +1,5 @@
 import Image from './Image';
+import { fillModal } from './modal';
 
 export function handleImageClick(event, allImages) {
   const element = event.target;
@@ -6,7 +7,7 @@ export function handleImageClick(event, allImages) {
     const {
       dataset: { index },
     } = element;
-    console.log(allImages[index]);
+    fillModal(allImages[index], true);
   }
 }
 
