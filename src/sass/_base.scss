@@ -25,10 +25,12 @@ body {
   font-weight: 400;
   line-height: 1.75;
   color: var(--white);
+  position: relative;
 }
 
 p {
   margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 
 h1,
