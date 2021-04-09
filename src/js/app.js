@@ -1,5 +1,5 @@
 import Image from './Image';
-import { handleImageClick, appendImages } from './resultImages';
+import { handleImageClick, appendImages } from './imageGallery';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
