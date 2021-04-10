@@ -23,6 +23,7 @@ async function handleSearchSubmission(e) {
   e.preventDefault();
   if (!e.target.image.value) return;
   query = e.target.image.value;
+  allImages = [];
 
   toggleLoadingAnimation('start');
   Image.resetPage(); // Resetting page number for new query
@@ -30,7 +31,6 @@ async function handleSearchSubmission(e) {
   isNextAvailable = !!queryResults.next_page;
   toggleLoadingAnimation('end');
   const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
-
   allImages = [...photos];
   console.log(allImages);
 }
