@@ -39,13 +39,16 @@ export function fillModal(object, index, toggleModal = false) {
   modalImage.src = object.mediumLink;
   modalImage.alt = `Taken by ${object.photographer}`;
 
+  // Setting photogrpher page link
   modalPhototgrapher.innerText = object.photographer;
-  modalColor.innerText = object.avgColor;
+  modalPhototgrapher.href = object.photographerURL;
 
+  modalColor.innerText = object.avgColor;
   // Showing the Avg. color as background
   modalColor.style.backgroundColor = object.avgColor;
   // Setting text color based on background
   modalColor.style.color = isDark(object.avgColor) ? '#000' : '#fff';
+
   modalOriginalLink.href = object.originalLink;
   modalCompressedLink.href = object.compressedLink;
   modalMediumLink.href = object.mediumLink;

@@ -5,12 +5,13 @@ export default class Image {
 
   constructor(data) {
     this.id = data.id;
+    this.pageURL = data.url;
     this.photographer = data.photographer;
+    this.photographerURL = data.photographer_url;
     this.avgColor = data.avg_color;
     this.originalLink = data.src.original;
     this.compressedLink = `${this.originalLink}?auto=compress`;
     this.mediumLink = `${this.compressedLink}&cs=tinysrgb&h=350`;
-    // TODO: Save photographer URL and direct pexel page
   }
 
   giveHtmlNode(index) {
@@ -48,7 +49,7 @@ export default class Image {
     this.#page++;
     return data;
   }
-  // TODO: Make a static method to fetch results based on query and id
+  // TODO: Make a static method to fetch results based on and id
   // TODO: Make a static method to check if an id is bookmarked (in LS)
   // TODO: Make a method to bookmark an image to storage and toggles property
   // TODO: Make a method to unbookmark an image from storage and toggles property
