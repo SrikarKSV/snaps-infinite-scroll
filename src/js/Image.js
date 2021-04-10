@@ -10,6 +10,7 @@ export default class Image {
     this.originalLink = data.src.original;
     this.compressedLink = `${this.originalLink}?auto=compress`;
     this.mediumLink = `${this.compressedLink}&cs=tinysrgb&h=350`;
+    // TODO: Save photographer URL and direct pexel page
   }
 
   giveHtmlNode(index) {
@@ -34,12 +35,16 @@ export default class Image {
     return data;
   }
 
-  static async fetchImagesQuery(query) {
-    const data = await this.#fetchData(
-      `https://api.pexels.com/v1/search?query=${encodeURIComponent(
+  static async fetchImages(query = 'curated') {
+    let link;
+    if (query === 'curated') {
+      link = `https://api.pexels.com/v1/curated?page=${this.#page}`;
+    } else {
+      link = `https://api.pexels.com/v1/search?query=${encodeURIComponent(
         query
-      )}&page=${this.#page}`
-    );
+      )}&page=${this.#page}`;
+    }
+    const data = await this.#fetchData(link);
     this.#page++;
     return data;
   }

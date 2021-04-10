@@ -26,7 +26,7 @@ async function handleSearchSubmission(e) {
 
   toggleLoadingAnimation('start');
   Image.resetPage(); // Resetting page number for new query
-  const queryResults = await Image.fetchImagesQuery(query);
+  const queryResults = await Image.fetchImages(query);
   isNextAvailable = !!queryResults.next_page;
   toggleLoadingAnimation('end');
   const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
@@ -47,7 +47,7 @@ async function handleInfiniteScroll(payload, observer) {
   if (!isNextAvailable || loading) return;
 
   if (payload[0].intersectionRatio > 0.5) {
-    const queryResults = await Image.fetchImagesQuery(query);
+    const queryResults = await Image.fetchImages(query);
     isNextAvailable = !!queryResults.next_page;
     const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
 
@@ -61,3 +61,13 @@ function toggleLoadingAnimation(state) {
   loading = !loading;
   loadingAnimation.classList.toggle('show');
 }
+
+// Load curated images when DOMContentLoaded
+window.addEventListener('DOMContentLoaded', async () => {
+  toggleLoadingAnimation('start');
+  const queryResults = await Image.fetchImages();
+  isNextAvailable = !!queryResults.next_page;
+  toggleLoadingAnimation('end');
+  const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
+  allImages = [...photos];
+});
