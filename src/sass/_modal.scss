@@ -49,4 +49,10 @@
     padding: 5px 10px;
     border-radius: var(--border-radius-sm);
   }
+
+  &__direction {
+    position: absolute;
+    bottom: 0;
+    margin: 0.5rem;
+  }
 }
