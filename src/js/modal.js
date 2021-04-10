@@ -18,8 +18,22 @@ function handleCloseModal(e) {
   }
 }
 
+export function handleDirection(e, allImages) {
+  const button = e.currentTarget;
+  const closestModalInner = button.closest('.modal__inner');
+  const modalIndex = parseInt(closestModalInner.dataset.index);
+
+  loadModalData(modalIndex, allImages, button.dataset.direction);
+}
+
+export function loadModalData(modalIndex, allImages, direction) {
+  direction === 'left' ? modalIndex-- : modalIndex++;
+  if (!allImages[modalIndex]) return;
+  fillModal(allImages[modalIndex], modalIndex, false);
+}
+
 export function fillModal(object, index, toggleModal = false) {
-  // Addind data-index for keyboard
+  // Addind data-index for switching modal data
   modalInner.dataset.index = index;
   // No need to fetch the modal image as already loaded for gallery!
   modalImage.src = object.mediumLink;
@@ -38,10 +52,4 @@ export function fillModal(object, index, toggleModal = false) {
   if (toggleModal) {
     modal.classList.add('show');
   }
-}
-
-export function loadModalData(modalIndex, allImages, direction) {
-  direction === 'left' ? modalIndex-- : modalIndex++;
-  if (!allImages[modalIndex]) return;
-  fillModal(allImages[modalIndex], modalIndex, false);
 }
