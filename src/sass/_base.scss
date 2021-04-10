@@ -5,6 +5,7 @@
   --red: #ff0041;
   --logo-color: #5773ff;
   --yellow: #ffe100;
+  --light-blue: #00beff;
   --border-radius-sm: 3px;
   --border-radius-lg: 5px;
 }
@@ -68,6 +69,10 @@ h5 {
 small,
 .text_small {
   font-size: 0.707rem;
+}
+
+a {
+  color: inherit;
 }
 
 button,
