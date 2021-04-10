@@ -1,5 +1,6 @@
 import Image from './Image';
 import { handleImageClick, appendImages } from './imageGallery';
+import { loadModalData } from './modal';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
@@ -11,6 +12,16 @@ let allImages = [];
 let isNextAvailable = false;
 let query;
 let loading = false;
+
+// Load curated images when DOMContentLoaded
+window.addEventListener('DOMContentLoaded', async () => {
+  toggleLoadingAnimation('start');
+  const queryResults = await Image.fetchImages();
+  isNextAvailable = !!queryResults.next_page;
+  toggleLoadingAnimation('end');
+  const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
+  allImages = [...photos];
+});
 
 // Event listeners
 searchForm.addEventListener('submit', handleSearchSubmission);
@@ -62,12 +73,26 @@ function toggleLoadingAnimation(state) {
   loadingAnimation.classList.toggle('show');
 }
 
-// Load curated images when DOMContentLoaded
-window.addEventListener('DOMContentLoaded', async () => {
-  toggleLoadingAnimation('start');
-  const queryResults = await Image.fetchImages();
-  isNextAvailable = !!queryResults.next_page;
-  toggleLoadingAnimation('end');
-  const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
-  allImages = [...photos];
-});
+// Keyboard shortcuts
+const modal = document.querySelector('.modal');
+const modalInner = document.querySelector('.modal__inner');
+
+window.addEventListener('keyup', handleKeyboard);
+
+function handleKeyboard(e) {
+  // Switch images in modal
+  if (modal.classList.contains('show')) {
+    let modalIndex = parseInt(modalInner.dataset.index);
+    switch (e.key) {
+      case 'ArrowLeft':
+        loadModalData(modalIndex, allImages, 'left');
+        break;
+      case 'ArrowRight':
+        loadModalData(modalIndex, allImages, 'right');
+        break;
+    }
+  }
+  if (e.key === 'Escape') {
+    modal.classList.remove('show');
+  }
+}
