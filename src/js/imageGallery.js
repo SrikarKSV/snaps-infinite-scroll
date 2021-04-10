@@ -7,7 +7,7 @@ export function handleImageClick(event, allImages) {
     const {
       dataset: { index },
     } = element;
-    fillModal(allImages[index], true);
+    fillModal(allImages[index], index, true);
   }
 }
 

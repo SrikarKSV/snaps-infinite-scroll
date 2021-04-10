@@ -1,6 +1,7 @@
 import { isDark } from './lib/utils';
 
 const modal = document.querySelector('.modal');
+const modalInner = document.querySelector('.modal__inner');
 const modalImage = document.querySelector('.modal__image img');
 const modalPhototgrapher = document.querySelector('.modal__photographer');
 const modalColor = document.querySelector('.modal__avgcolor');
@@ -17,10 +18,13 @@ function handleCloseModal(e) {
   }
 }
 
-export function fillModal(object, toggleModal = false) {
+export function fillModal(object, index, toggleModal = false) {
+  // Addind data-index for keyboard
+  modalInner.dataset.index = index;
   // No need to fetch the modal image as already loaded for gallery!
   modalImage.src = object.mediumLink;
   modalImage.alt = `Taken by ${object.photographer}`;
+
   modalPhototgrapher.innerText = object.photographer;
   modalColor.innerText = object.avgColor;
 
@@ -34,4 +38,10 @@ export function fillModal(object, toggleModal = false) {
   if (toggleModal) {
     modal.classList.add('show');
   }
+}
+
+export function loadModalData(modalIndex, allImages, direction) {
+  direction === 'left' ? modalIndex-- : modalIndex++;
+  if (!allImages[modalIndex]) return;
+  fillModal(allImages[modalIndex], modalIndex, false);
 }
