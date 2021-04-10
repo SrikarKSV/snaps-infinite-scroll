@@ -33,6 +33,14 @@ modalDirectionBtns.forEach((btn) =>
   btn.addEventListener('click', (e) => handleDirection(e, allImages))
 );
 
+// Dark mode
+const darkModeBtn = document.querySelector('.header__darkmode');
+darkModeBtn.addEventListener('click', toggleDarkMode);
+
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
+
 // Callbacks
 
 // Handle search query

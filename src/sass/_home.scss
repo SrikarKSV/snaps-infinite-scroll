@@ -36,7 +36,7 @@ header {
       margin-right: 20px;
 
       svg {
-        fill: var(--white);
+        fill: var(--svg-fill-color);
       }
     }
   }
@@ -55,6 +55,7 @@ header {
       padding: 3px 5px;
       width: 25rem;
       margin: 0.3rem 0 0.5rem;
+      border: 3px solid var(--input-text-border);
       border-radius: var(--border-radius-sm);
     }
 

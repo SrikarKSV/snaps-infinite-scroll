@@ -2,12 +2,24 @@
   --secondary-bg-color: #182635;
   --primary-bg-color: #0e141b;
   --white: #fff;
+  --text-color: var(--white);
+  --svg-fill-color: var(--white);
+  --input-text-border: var(--white);
   --red: #ff0041;
   --logo-color: #5773ff;
   --yellow: #ffe100;
   --light-blue: #00beff;
   --border-radius-sm: 3px;
   --border-radius-lg: 5px;
+}
+
+.dark-mode {
+  --black: #000;
+  --secondary-bg-color: #f4e1e3;
+  --primary-bg-color: #fff;
+  --text-color: var(--black);
+  --svg-fill-color: var(--black);
+  --input-text-border: var(--black);
 }
 
 * {
@@ -25,7 +37,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.75;
-  color: var(--white);
+  color: var(--text-color);
   position: relative;
 }
 
