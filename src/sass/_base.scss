@@ -8,6 +8,7 @@
   --red: #ff0041;
   --logo-color: #5773ff;
   --yellow: #ffe100;
+  --green: #55c57a;
   --light-blue: #00beff;
   --border-radius-sm: 3px;
   --border-radius-lg: 5px;
@@ -39,6 +40,7 @@ body {
   line-height: 1.75;
   color: var(--text-color);
   position: relative;
+  transition: background 0.3s linear;
 }
 
 p {
