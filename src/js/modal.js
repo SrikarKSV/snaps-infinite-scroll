@@ -8,6 +8,7 @@ const modalColor = document.querySelector('.modal__avgcolor');
 const modalOriginalLink = document.querySelector('.button.original');
 const modalCompressedLink = document.querySelector('.button.compressed');
 const modalMediumLink = document.querySelector('.button.medium');
+const modalBookmarkBtn = document.querySelector('.button--bookmark');
 
 modal.addEventListener('click', handleCloseModal);
 
@@ -18,12 +19,29 @@ function handleCloseModal(e) {
   }
 }
 
-export function handleDirection(e, allImages) {
+function toggleBookmarkBtnStyle(isBookmarked) {
+  if (isBookmarked) {
+    modalBookmarkBtn.innerText = 'Bookmarked';
+    modalBookmarkBtn.style.backgroundColor = 'var(--green)';
+  } else {
+    modalBookmarkBtn.innerText = 'Bookmark';
+    modalBookmarkBtn.style.backgroundColor = 'var(--yellow)';
+  }
+}
+
+export function handleModalBtns(e, allImages) {
   const button = e.currentTarget;
   const closestModalInner = button.closest('.modal__inner');
   const modalIndex = parseInt(closestModalInner.dataset.index);
 
-  loadModalData(modalIndex, allImages, button.dataset.direction);
+  if (button.matches('.button--bookmark')) {
+    !allImages[modalIndex].isBookmarked()
+      ? allImages[modalIndex].bookmark()
+      : allImages[modalIndex].unbookmark();
+    toggleBookmarkBtnStyle(allImages[modalIndex].isBookmarked());
+  } else {
+    loadModalData(modalIndex, allImages, button.dataset.direction);
+  }
 }
 
 export function loadModalData(modalIndex, allImages, direction) {
@@ -42,6 +60,9 @@ export function fillModal(object, index, toggleModal = false) {
   // Setting photogrpher page link
   modalPhototgrapher.innerText = object.photographer;
   modalPhototgrapher.href = object.photographerURL;
+
+  // Toggle bookmark button
+  toggleBookmarkBtnStyle(object.isBookmarked());
 
   modalColor.innerText = object.avgColor;
   // Showing the Avg. color as background

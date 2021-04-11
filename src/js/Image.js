@@ -23,6 +23,35 @@ export default class Image {
     return document.createRange().createContextualFragment(html);
   }
 
+  isBookmarked() {
+    let bookmarkedImages = JSON.parse(localStorage.getItem('images')) || [];
+    const image = !!bookmarkedImages.find((image) => image.id === this.id);
+    return image;
+  }
+
+  bookmark() {
+    let bookmarkedImages = JSON.parse(localStorage.getItem('images')) || [];
+    localStorage.setItem(
+      'images',
+      JSON.stringify([
+        ...bookmarkedImages,
+        { id: this.id, originalLink: this.originalLink },
+      ])
+    );
+  }
+
+  unbookmark() {
+    let bookmarkedImages = JSON.parse(localStorage.getItem('images')) || [];
+    const imageIndex = bookmarkedImages.findIndex(
+      (image) => image.id === this.id
+    );
+    if (imageIndex >= 0) {
+      bookmarkedImages.splice(imageIndex, 1);
+      localStorage.setItem('images', JSON.stringify([...bookmarkedImages]));
+    }
+  }
+
+  // Fetching data
   static resetPage() {
     this.#page = 1;
   }
@@ -50,7 +79,4 @@ export default class Image {
     return data;
   }
   // TODO: Make a static method to fetch results based on and id
-  // TODO: Make a static method to check if an id is bookmarked (in LS)
-  // TODO: Make a method to bookmark an image to storage and toggles property
-  // TODO: Make a method to unbookmark an image from storage and toggles property
 }

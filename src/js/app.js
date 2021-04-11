@@ -1,14 +1,12 @@
 import Image from './Image';
 import { handleImageClick, appendImages } from './imageGallery';
-import { loadModalData, handleDirection } from './modal';
+import { loadModalData, handleModalBtns } from './modal';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
 const loadingAnimation = document.querySelector('.loading-animation');
 const intersectionObserver = document.querySelector('.intersection-observer');
-const modalDirectionBtns = document.querySelectorAll(
-  '.modal__direction button'
-);
+const modalBtns = document.querySelectorAll('.modal__inner button');
 
 // State variables
 let allImages = [];
@@ -29,8 +27,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listeners
 searchForm.addEventListener('submit', handleSearchSubmission);
 imgGrid.addEventListener('click', (e) => handleImageClick(e, allImages));
-modalDirectionBtns.forEach((btn) =>
-  btn.addEventListener('click', (e) => handleDirection(e, allImages))
+modalBtns.forEach((btn) =>
+  btn.addEventListener('click', (e) => handleModalBtns(e, allImages))
 );
 
 // Dark mode
