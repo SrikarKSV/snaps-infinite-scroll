@@ -1,11 +1,13 @@
-header {
-  background-color: var(--secondary-bg-color);
-}
-
 .header,
 .main {
   max-width: 1300px;
   margin: auto;
+}
+
+header,
+.results {
+  background-color: var(--secondary-bg-color);
+  transition: background 0.3s linear;
 }
 
 .header {
@@ -69,7 +71,6 @@ header {
 }
 
 .results {
-  background-color: var(--secondary-bg-color);
   overflow: auto;
   margin: 2rem 0;
   border-radius: var(--border-radius-lg);
