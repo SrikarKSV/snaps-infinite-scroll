@@ -1,4 +1,5 @@
-.modal {
+.modal,
+.bookmark {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,22 +21,35 @@
       transform: translateY(0);
       opacity: 1;
     }
-  }
 
+    & .bookmark__inner {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.modal,
+.bookmark {
   &__inner {
     background-color: var(--secondary-bg-color);
     max-width: 1300px;
     width: 70%;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
     padding: 2.5em;
     gap: 2rem;
     border-radius: var(--border-radius-lg);
     transition: all 0.3s linear;
     transform: translateY(-2rem);
     opacity: 0;
+  }
+}
+
+.modal {
+  &__inner {
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   &__image {
@@ -90,5 +104,15 @@
         transform: translate(110%);
       }
     }
+  }
+}
+
+.bookmark {
+  &__inner {
+    flex-direction: column;
+  }
+
+  &__heading {
+    text-align: center;
   }
 }
