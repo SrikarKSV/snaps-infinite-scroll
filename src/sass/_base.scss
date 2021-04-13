@@ -108,3 +108,35 @@ input {
   padding: 0.3em 0.6em;
   border-radius: var(--border-radius-sm);
 }
+
+img {
+  cursor: pointer;
+}
+
+// Animation
+.pulse {
+  width: 100px;
+  height: 100px;
+  background: var(--logo-color);
+  border-radius: 50%;
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(109, 131, 241, 0.7),
+      0 0 0 0 rgba(109, 131, 241, 0.7);
+  }
+  40% {
+    box-shadow: 0 0 0 30px rgba(109, 131, 241, 0),
+      0 0 0 0 rgba(109, 131, 241, 0.7);
+  }
+  80% {
+    box-shadow: 0 0 0 30px rgba(109, 131, 241, 0),
+      0 0 0 20px rgba(109, 131, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(109, 131, 241, 0),
+      0 0 0 20px rgba(109, 131, 241, 0);
+  }
+}
