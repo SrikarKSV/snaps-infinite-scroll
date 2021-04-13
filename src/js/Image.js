@@ -78,5 +78,11 @@ export default class Image {
     this.#page++;
     return data;
   }
+
+  static async fetchById(id) {
+    const link = `https://api.pexels.com/v1/photos/${id}`;
+    const data = await this.#fetchData(link);
+    return data;
+  }
   // TODO: Make a static method to fetch results based on and id
 }

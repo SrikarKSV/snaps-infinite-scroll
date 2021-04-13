@@ -1,5 +1,7 @@
 import Image from './Image';
-import { fillModal } from './modal';
+import Modal from './Modal';
+
+const modal = document.querySelector('.modal');
 
 export function handleImageClick(event, allImages) {
   const element = event.target;
@@ -7,7 +9,8 @@ export function handleImageClick(event, allImages) {
     const {
       dataset: { index },
     } = element;
-    fillModal(allImages[index], index, true);
+    const imgGalleryModal = new Modal(modal, allImages, index);
+    imgGalleryModal.render();
   }
 }
 

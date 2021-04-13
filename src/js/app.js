@@ -1,12 +1,13 @@
 import Image from './Image';
 import { handleImageClick, appendImages } from './imageGallery';
-import { loadModalData, handleModalBtns } from './modal';
+import { toggleBookmarkModal } from './bookmark';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
 const loadingAnimation = document.querySelector('.loading-animation');
 const intersectionObserver = document.querySelector('.intersection-observer');
-const modalBtns = document.querySelectorAll('.modal__inner button');
+const bookmarkMarkBtn = document.querySelector('.header__bookmark');
+const bookmarkModal = document.querySelector('.bookmark');
 
 // State variables
 let allImages = [];
@@ -27,9 +28,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listeners
 searchForm.addEventListener('submit', handleSearchSubmission);
 imgGrid.addEventListener('click', (e) => handleImageClick(e, allImages));
-modalBtns.forEach((btn) =>
-  btn.addEventListener('click', (e) => handleModalBtns(e, allImages))
-);
+bookmarkMarkBtn.addEventListener('click', toggleBookmarkModal);
 
 // Dark mode
 const darkModeBtn = document.querySelector('.header__darkmode');
@@ -83,28 +82,4 @@ function toggleLoadingAnimation(state) {
   state === 'start' ? (imgGrid.innerHTML = '') : null;
   loading = !loading;
   loadingAnimation.classList.toggle('show');
-}
-
-// Keyboard shortcuts
-const modal = document.querySelector('.modal');
-const modalInner = document.querySelector('.modal__inner');
-
-window.addEventListener('keyup', handleKeyboard);
-
-function handleKeyboard(e) {
-  // Switch images in modal
-  if (modal.classList.contains('show')) {
-    let modalIndex = parseInt(modalInner.dataset.index);
-    switch (e.key) {
-      case 'ArrowLeft':
-        loadModalData(modalIndex, allImages, 'left');
-        break;
-      case 'ArrowRight':
-        loadModalData(modalIndex, allImages, 'right');
-        break;
-    }
-  }
-  if (e.key === 'Escape') {
-    modal.classList.remove('show');
-  }
 }
