@@ -1,4 +1,5 @@
 import { isDark } from './lib/utils';
+import Image from './Image';
 
 export default class Modal {
   constructor(modalContainer, allImages, index) {
@@ -41,27 +42,29 @@ export default class Modal {
     );
   }
 
-  _handleModalBtns(e) {
+  async _handleModalBtns(e) {
     const button = e.currentTarget;
 
+    const image = this.allImages[this.index];
+
     if (button.matches('.button--bookmark')) {
-      !this.allImages[this.index].isBookmarked()
-        ? this.allImages[this.index].bookmark()
-        : this.allImages[this.index].unbookmark();
-      this._toggleBookmarkBtnStyle(this.allImages[this.index].isBookmarked());
+      !image.isBookmarked() ? image.bookmark() : image.unbookmark();
+      this._toggleBookmarkBtnStyle(image.isBookmarked());
     } else {
-      this._loadModalData(button.dataset.direction);
+      await this._loadModalData(button.dataset.direction);
     }
   }
 
-  _loadModalData(direction) {
+  async _loadModalData(direction) {
     // Storing index in temp variable to check if the image instance exists
     let index = this.index;
     direction === 'left' ? index-- : index++;
     if (!this.allImages[index]) return;
     // If it exists the instance variable is changes for progression
     this.index = index;
-    this._fillModal(this.allImages[this.index]);
+    // Converting to Image instance if not
+    await this._makeImageInstance();
+    this._fillModal();
   }
 
   _toggleBookmarkBtnStyle(isBookmarked) {
@@ -89,7 +92,18 @@ export default class Modal {
     }
   }
 
-  _fillModal(object) {
+  async _makeImageInstance() {
+    const object = this.allImages[this.index];
+    const isInstanceImage = object instanceof Image;
+    if (isInstanceImage) return;
+
+    const { id } = object;
+    const image = await Image.fetchById(id);
+    this.allImages[this.index] = new Image(image);
+  }
+
+  _fillModal() {
+    const object = this.allImages[this.index];
     // No need to fetch the modal image as already loaded for gallery!
     this.modalImage.src = object.mediumLink;
     this.modalImage.alt = `Taken by ${object.photographer}`;
@@ -126,8 +140,9 @@ export default class Modal {
     }
   }
 
-  render() {
-    this._fillModal(this.allImages[this.index]);
+  async render() {
+    await this._makeImageInstance();
+    this._fillModal();
     this.modalContainer.classList.add('show');
   }
 }

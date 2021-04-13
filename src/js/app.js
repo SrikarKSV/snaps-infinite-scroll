@@ -27,7 +27,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // Event listeners
 searchForm.addEventListener('submit', handleSearchSubmission);
-imgGrid.addEventListener('click', (e) => handleImageClick(e, allImages));
+imgGrid.addEventListener(
+  'click',
+  async (e) => await handleImageClick(e, allImages)
+);
 bookmarkMarkBtn.addEventListener('click', toggleBookmarkModal);
 
 // Dark mode

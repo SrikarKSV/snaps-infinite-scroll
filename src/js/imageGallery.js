@@ -3,14 +3,14 @@ import Modal from './Modal';
 
 const modal = document.querySelector('.modal');
 
-export function handleImageClick(event, allImages) {
+export async function handleImageClick(event, allImages) {
   const element = event.target;
   if (element.matches('img')) {
     const {
       dataset: { index },
     } = element;
     const imgGalleryModal = new Modal(modal, allImages, index);
-    imgGalleryModal.render();
+    await imgGalleryModal.render();
   }
 }
 
