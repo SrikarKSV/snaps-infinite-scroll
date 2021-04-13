@@ -84,5 +84,4 @@ export default class Image {
     const data = await this.#fetchData(link);
     return data;
   }
-  // TODO: Make a static method to fetch results based on and id
 }
