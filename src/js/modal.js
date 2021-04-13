@@ -40,6 +40,7 @@ export default class Modal {
     this.modalBookmarkBtn = this.modalContainer.querySelector(
       '.button--bookmark'
     );
+    this.modalLoading = this.modalContainer.querySelector('.modal__loading');
   }
 
   async _handleModalBtns(e) {
@@ -98,8 +99,10 @@ export default class Modal {
     if (isInstanceImage) return;
 
     const { id } = object;
+    this.modalLoading.classList.add('show');
     const image = await Image.fetchById(id);
     this.allImages[this.index] = new Image(image);
+    this.modalLoading.classList.remove('show');
   }
 
   _fillModal() {

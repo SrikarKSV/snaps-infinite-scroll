@@ -107,6 +107,33 @@
   }
 }
 
+// Loading animation
+.modal {
+  &__loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    &.show {
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+    }
+  }
+
+  .pulse {
+    width: 100px;
+    height: 100px;
+    background: var(--logo-color);
+    border-radius: 50%;
+    animation: pulse 2s linear infinite;
+    z-index: 9;
+  }
+}
+
 .bookmark {
   &__inner {
     flex-direction: column;
