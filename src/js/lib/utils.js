@@ -5,3 +5,10 @@ export function isDark(bgColor) {
   const b = parseInt(color.substring(4, 6), 16); // hexToB
   return r * 0.299 + g * 0.587 + b * 0.114 > 186;
 }
+
+export function handleCloseModal(e, innerElement, outerlement) {
+  const isModalInner = !e.target.closest(`.${innerElement}`);
+  if (isModalInner) {
+    outerlement.classList.remove('show');
+  }
+}
