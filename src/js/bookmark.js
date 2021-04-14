@@ -25,14 +25,16 @@ async function openBookmarkedModal(e) {
 
 export function toggleBookmarkModal() {
   let bookmarkedImages = JSON.parse(localStorage.getItem('images')) || [];
-  bookmarkedImages = bookmarkedImages.map(
-    (image, index) =>
-      /* html */ `<li><img src="${
-        image.originalLink
-      }?auto=compress&cs=tinysrgb&h=130" alt="Bookmarked image ${
-        index + 1
-      }" data-index="${index}"/></li>`
-  );
+  bookmarkedImages = bookmarkedImages
+    .map(
+      (image, index) =>
+        /* html */ `<li><img src="${
+          image.originalLink
+        }?auto=compress&cs=tinysrgb&h=130" alt="Bookmarked image ${
+          index + 1
+        }" data-index="${index}"/></li>`
+    )
+    .join(' ');
   bookmarkImagesEl.innerHTML = bookmarkedImages;
   bookmarkModal.classList.toggle('show');
 }
