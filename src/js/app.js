@@ -11,6 +11,7 @@ const imgGrid = document.querySelector('.img-grid');
 const loadingAnimation = document.querySelector('.loading-animation');
 const intersectionObserver = document.querySelector('.intersection-observer');
 const bookmarkMarkBtn = document.querySelector('.header__bookmark');
+const queryControlContainer = document.querySelector('.query-controls');
 const queryControlForm = document.querySelector('.query-controls__form');
 
 // State variables
@@ -54,6 +55,8 @@ async function handleSearchSubmission(e) {
   if (!e.target.image.value) return;
   query = e.target.image.value;
   fetchAndAppendImages();
+  // Toggle query controls
+  queryControlContainer.classList.add('show');
 }
 
 // Handle query controls
@@ -95,13 +98,6 @@ async function handleInfiniteScroll(payload) {
   }
 }
 
-// Loading animations
-function toggleLoadingAnimation(state) {
-  state === 'start' ? (imgGrid.innerHTML = '') : null;
-  loading = !loading;
-  loadingAnimation.classList.toggle('show');
-}
-
 async function fetchAndAppendImages() {
   // Emptying allImages to set index on dataset of image
   allImages = [];
@@ -116,5 +112,11 @@ async function fetchAndAppendImages() {
   toggleLoadingAnimation('end');
   const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
   allImages = [...photos];
-  console.log(allImages);
+}
+
+// Loading animations
+function toggleLoadingAnimation(state) {
+  state === 'start' ? (imgGrid.innerHTML = '') : null;
+  loading = !loading;
+  loadingAnimation.classList.toggle('show');
 }
