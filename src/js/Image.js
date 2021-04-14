@@ -56,8 +56,9 @@ export default class Image {
     this.#page = 1;
   }
 
-  static async #fetchData(url) {
+  static async #fetchData(url, params) {
     const { data } = await axios.get(url, {
+      params,
       headers: {
         Authorization: process.env.API_KEY,
       },
@@ -65,7 +66,7 @@ export default class Image {
     return data;
   }
 
-  static async fetchImages(query = 'curated') {
+  static async fetchImages(query = 'curated', params = {}) {
     let link;
     if (query === 'curated') {
       link = `https://api.pexels.com/v1/curated?page=${this.#page}`;
@@ -74,7 +75,7 @@ export default class Image {
         query
       )}&page=${this.#page}`;
     }
-    const data = await this.#fetchData(link);
+    const data = await this.#fetchData(link, params);
     this.#page++;
     return data;
   }
