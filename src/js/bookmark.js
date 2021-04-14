@@ -10,6 +10,9 @@ bookmarkModal.addEventListener('click', (e) =>
 );
 
 bookmarkImagesEl.addEventListener('click', openBookmarkedModal);
+window.addEventListener('keyup', (e) =>
+  handleCloseModal(e, 'bookmark__inner', bookmarkModal)
+);
 
 async function openBookmarkedModal(e) {
   const img = e.target;
