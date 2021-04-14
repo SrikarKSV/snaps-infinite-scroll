@@ -48,6 +48,23 @@
       </div>
       <div class="results">
         <h3>Results</h3>
+        <div class="query-controls">
+          <form class="query-controls__form">
+            <div class="query-controls__orientation">
+              <input type="radio" name="orientation" value="landscape" id="landscape">
+              <label for="landscape">Landscape</label>
+              <input type="radio" name="orientation" value="portrait" id="portrait">
+              <label for="portrait">Portrait</label>
+              <input type="radio" name="orientation" value="square" id="square">
+              <label for="square">Square</label>
+            </div>
+            <div class="query-controls__color">
+              <input type="color" name="color" id="color" value="#0E141B">
+              <label for="color">Color</label>
+            </div>
+            <input class="button query-controls__reset" type="reset" value="Reset">
+          </form>
+        </div>
         <div class="loading-animation">
           <div class="pulse"></div>
         </div>
