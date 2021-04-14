@@ -2,6 +2,25 @@ import Image from './Image';
 import Modal from './Modal';
 
 const modal = document.querySelector('.modal');
+const form = document.querySelector('.query-controls__form');
+
+export async function fetchQueryControl(
+  query,
+  isColorPickerChanged,
+  shouldPageReset
+) {
+  const orientation = form.orientation.value;
+  const color = form.color.value;
+  const params = {
+    orientation,
+    color,
+  };
+  if (!isColorPickerChanged) delete params.color;
+  // Will reset page number (not for observer)
+  shouldPageReset ? Image.resetPage() : null;
+  const images = await Image.fetchImages(query, params);
+  return images;
+}
 
 export async function handleImageClick(event, allImages) {
   const element = event.target;

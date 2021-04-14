@@ -1,5 +1,9 @@
 import Image from './Image';
-import { handleImageClick, appendImages } from './imageGallery';
+import {
+  handleImageClick,
+  appendImages,
+  fetchQueryControl,
+} from './imageGallery';
 import { toggleBookmarkModal } from './bookmark';
 
 const searchForm = document.querySelector('.main__form form');
@@ -7,13 +11,14 @@ const imgGrid = document.querySelector('.img-grid');
 const loadingAnimation = document.querySelector('.loading-animation');
 const intersectionObserver = document.querySelector('.intersection-observer');
 const bookmarkMarkBtn = document.querySelector('.header__bookmark');
-const bookmarkModal = document.querySelector('.bookmark');
+const queryControlForm = document.querySelector('.query-controls__form');
 
 // State variables
 let allImages = [];
 let isNextAvailable = false;
 let query;
 let loading = false;
+let isColorPickerChanged = false;
 
 // Load curated images when DOMContentLoaded
 window.addEventListener('DOMContentLoaded', async () => {
@@ -48,31 +53,41 @@ async function handleSearchSubmission(e) {
   e.preventDefault();
   if (!e.target.image.value) return;
   query = e.target.image.value;
-  allImages = [];
+  fetchAndAppendImages();
+}
 
-  toggleLoadingAnimation('start');
-  Image.resetPage(); // Resetting page number for new query
-  const queryResults = await Image.fetchImages(query);
-  isNextAvailable = !!queryResults.next_page;
-  toggleLoadingAnimation('end');
-  const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
-  allImages = [...photos];
-  console.log(allImages);
+// Handle query controls
+const colorPicker = document.querySelector('#color');
+const formResetBtn = document.querySelector('.query-controls__reset');
+
+queryControlForm.addEventListener('change', fetchAndAppendImages);
+formResetBtn.addEventListener('click', handleQueryControlReset);
+colorPicker.addEventListener('change', () => (isColorPickerChanged = true));
+
+async function handleQueryControlReset() {
+  isColorPickerChanged = false;
+  queryControlForm.reset();
+
+  fetchAndAppendImages();
 }
 
 // Handle infinte scroll
 const observer = new IntersectionObserver(handleInfiniteScroll, {
-  rootMargin: '60%',
+  rootMargin: '70%',
   threshold: [0, 0.5, 1],
 });
 
 observer.observe(intersectionObserver);
 
-async function handleInfiniteScroll(payload, observer) {
+async function handleInfiniteScroll(payload) {
   if (!isNextAvailable || loading) return;
 
   if (payload[0].intersectionRatio > 0.5) {
-    const queryResults = await Image.fetchImages(query);
+    const queryResults = await fetchQueryControl(
+      query,
+      isColorPickerChanged,
+      false
+    );
     isNextAvailable = !!queryResults.next_page;
     const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
 
@@ -85,4 +100,21 @@ function toggleLoadingAnimation(state) {
   state === 'start' ? (imgGrid.innerHTML = '') : null;
   loading = !loading;
   loadingAnimation.classList.toggle('show');
+}
+
+async function fetchAndAppendImages() {
+  // Emptying allImages to set index on dataset of image
+  allImages = [];
+  toggleLoadingAnimation('start');
+  const queryResults = await fetchQueryControl(
+    query,
+    isColorPickerChanged,
+    true
+  );
+  // Observer won't run is next page not available
+  isNextAvailable = !!queryResults.next_page;
+  toggleLoadingAnimation('end');
+  const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
+  allImages = [...photos];
+  console.log(allImages);
 }
