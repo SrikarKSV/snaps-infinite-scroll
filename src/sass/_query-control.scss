@@ -1,0 +1,48 @@
+.query-controls {
+  max-width: 70%;
+  margin: 0 auto 1.5rem;
+  display: none;
+  background-color: var(--query-control-bc);
+  color: var(--text-color-invert);
+  padding: 0.5em 0.3em;
+  border-radius: var(--border-radius-lg);
+
+  &.show {
+    display: block;
+  }
+
+  &__form {
+    input {
+      margin-right: 4px;
+    }
+
+    input[type="radio"] {
+      height: 18px;
+      width: 18px;
+    }
+
+    input[type="color"] {
+      border: 2px solid var(--black);
+    }
+
+    label {
+      font-size: 1.4rem;
+      margin: 0 2rem 0 0.3rem;
+    }
+  }
+
+  &__form,
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__reset {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--pink);
+  }
+}

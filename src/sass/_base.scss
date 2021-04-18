@@ -2,7 +2,9 @@
   --secondary-bg-color: #182635;
   --primary-bg-color: #0e141b;
   --white: #fff;
+  --black: #000;
   --text-color: var(--white);
+  --text-color-invert: var(--black);
   --svg-fill-color: var(--white);
   --input-text-border: var(--white);
   --red: #ff0041;
@@ -10,17 +12,20 @@
   --yellow: #ffe100;
   --green: #55c57a;
   --light-blue: #00beff;
+  --pink: #f34b7d;
   --border-radius-sm: 3px;
   --border-radius-lg: 5px;
+  --query-control-bc: var(--white);
 }
 
 .dark-mode {
-  --black: #000;
   --secondary-bg-color: #f4e1e3;
   --primary-bg-color: #fff;
+  --text-color-invert: var(--white);
   --text-color: var(--black);
   --svg-fill-color: var(--black);
   --input-text-border: var(--black);
+  --query-control-bc: #1f2932;
 }
 
 * {
