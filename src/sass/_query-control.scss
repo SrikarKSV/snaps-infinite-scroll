@@ -46,3 +46,18 @@
     background-color: var(--pink);
   }
 }
+
+// Media Quries
+@media only screen and (max-width: 28.125em) {
+  /* 450px */
+
+  .query-controls {
+    max-width: 90%;
+
+    &__form {
+      label {
+        margin: 0 0.1rem 0 0.3rem;
+      }
+    }
+  }
+}
