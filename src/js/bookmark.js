@@ -30,7 +30,7 @@ export function toggleBookmarkModal() {
       (image, index) =>
         /* html */ `<li><img src="${
           image.originalLink
-        }?auto=compress&cs=tinysrgb&h=130" alt="Bookmarked image ${
+        }?auto=compress&cs=tinysrgb&h=200" alt="Bookmarked image ${
           index + 1
         }" data-index="${index}"/></li>`
     )
