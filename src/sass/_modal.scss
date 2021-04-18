@@ -52,14 +52,6 @@
     flex-wrap: wrap;
   }
 
-  &__image {
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-
   &__avgcolor {
     padding: 5px 10px;
     border-radius: var(--border-radius-sm);
@@ -133,5 +125,31 @@
   &__heading {
     margin-top: 0;
     text-align: center;
+  }
+
+  &__images {
+    border: 2px solid var(--white);
+    border-radius: var(--border-radius-sm);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-flow: dense;
+    padding: 12px;
+    gap: 10px;
+    max-height: 50vh;
+    overflow: auto;
+
+    li {
+      list-style: none;
+    }
+  }
+}
+
+// Media Quries
+@media only screen and (max-width: 62.5em) {
+  /* 1000px */
+  .bookmark {
+    &__inner {
+      width: 90%;
+    }
   }
 }
