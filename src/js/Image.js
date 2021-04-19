@@ -57,13 +57,17 @@ export default class Image {
   }
 
   static async #fetchData(url, params) {
-    const { data } = await axios.get(url, {
-      params,
-      headers: {
-        Authorization: process.env.API_KEY,
-      },
-    });
-    return data;
+    try {
+      const { data } = await axios.get(url, {
+        params,
+        headers: {
+          Authorization: process.env.API_KEY,
+        },
+      });
+      return data;
+    } catch (e) {
+      return `💥 There was an error: ${e.message}`;
+    }
   }
 
   static async fetchImages(query = 'curated', params = {}) {

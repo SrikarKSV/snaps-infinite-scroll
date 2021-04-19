@@ -5,6 +5,7 @@ import {
   fetchQueryControl,
 } from './imageGallery';
 import { toggleBookmarkModal } from './bookmark';
+import { checkFetchError } from './lib/utils';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
@@ -30,8 +31,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Loading curated images
   toggleLoadingAnimation('start');
   const queryResults = await Image.fetchImages();
-  isNextAvailable = !!queryResults.next_page;
+  const isError = checkFetchError(queryResults, imgGrid);
   toggleLoadingAnimation('end');
+  if (isError) return;
+  isNextAvailable = !!queryResults.next_page;
   const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
   allImages = [...photos];
 });
@@ -99,6 +102,8 @@ async function handleInfiniteScroll(payload) {
       isColorPickerChanged,
       false
     );
+    const isError = checkFetchError(queryResults, imgGrid);
+    if (isError) return;
     isNextAvailable = !!queryResults.next_page;
     const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
 
@@ -116,8 +121,10 @@ async function fetchAndAppendImages() {
     true
   );
   // Observer won't run is next page not available
-  isNextAvailable = !!queryResults.next_page;
+  const isError = checkFetchError(queryResults, imgGrid);
   toggleLoadingAnimation('end');
+  if (isError) return;
+  isNextAvailable = !!queryResults.next_page;
   const photos = appendImages(queryResults, imgGrid, allImages); // Results fed and photos instances are returned
   allImages = [...photos];
 }

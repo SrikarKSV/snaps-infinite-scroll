@@ -12,3 +12,13 @@ export function handleCloseModal(e, innerElement, outerlement) {
     outerlement.classList.remove('show');
   }
 }
+
+export function checkFetchError(result, imgGrid) {
+  if (!Array.isArray(result?.photos) && result.startsWith('💥 There')) {
+    const h4 = document.createElement('h4');
+    h4.innerText = result;
+    imgGrid.append(h4);
+    return true;
+  }
+  return false;
+}
