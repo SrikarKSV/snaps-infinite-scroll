@@ -45,7 +45,6 @@
   &__inner {
     justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap;
   }
 
   &__avgcolor {
@@ -146,11 +145,62 @@
 }
 
 // Media Quries
+@media only screen and (max-width: 31.25em) {
+  /* 500px */
+  .modal {
+    &__inner {
+      padding: 1em;
+    }
+
+    &__description > *,
+    &__description .button {
+      font-size: 1.1rem;
+    }
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  /* 600px */
+  .modal {
+    &__inner {
+      width: 85vw;
+    }
+
+    // Pushing direction buttons inside
+    &__direction {
+      .button {
+        &--prev {
+          transform: translate(-70%);
+        }
+
+        &--next {
+          transform: translate(70%);
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 62.5em) {
   /* 1000px */
   .bookmark {
     &__inner {
       width: 90%;
+    }
+  }
+
+  .modal {
+    &__inner {
+      max-height: 95vh;
+      flex-direction: column;
+    }
+
+    // Making description scrollable
+    &__description {
+      overflow: auto;
+      width: 100%;
+      border: 2px solid var(--white);
+      padding: 10px 20px;
+      border-radius: var(--border-radius-sm);
     }
   }
 }
