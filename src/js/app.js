@@ -23,6 +23,11 @@ let isColorPickerChanged = false;
 
 // Load curated images when DOMContentLoaded
 window.addEventListener('DOMContentLoaded', async () => {
+  // Enabling dark or light mode
+  const mode = JSON.parse(localStorage.getItem('mode'));
+  mode === 'light' ? document.body.classList.add('light-mode') : null;
+
+  // Loading curated images
   toggleLoadingAnimation('start');
   const queryResults = await Image.fetchImages();
   isNextAvailable = !!queryResults.next_page;
@@ -44,7 +49,10 @@ const darkModeBtn = document.querySelector('.header__darkmode');
 darkModeBtn.addEventListener('click', toggleDarkMode);
 
 function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle('light-mode');
+  const isLightMode = document.body.classList.contains('light-mode');
+  const mode = isLightMode ? 'light' : 'dark';
+  localStorage.setItem('mode', JSON.stringify(mode));
 }
 
 // Callbacks
