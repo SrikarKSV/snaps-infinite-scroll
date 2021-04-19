@@ -17,11 +17,7 @@
     opacity: 1;
     pointer-events: all;
 
-    & .modal__inner {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
+    & .modal__inner,
     & .bookmark__inner {
       transform: translateY(0);
       opacity: 1;
@@ -117,6 +113,7 @@
   }
 }
 
+// Bookmark modal
 .bookmark {
   &__inner {
     flex-direction: column;
@@ -137,6 +134,10 @@
     gap: 10px;
     max-height: 50vh;
     overflow: auto;
+
+    p {
+      text-align: center;
+    }
 
     li {
       list-style: none;

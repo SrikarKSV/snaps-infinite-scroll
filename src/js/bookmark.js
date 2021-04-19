@@ -35,6 +35,8 @@ export function toggleBookmarkModal() {
         }" data-index="${index}"/></li>`
     )
     .join(' ');
-  bookmarkImagesEl.innerHTML = bookmarkedImages;
+  bookmarkImagesEl.innerHTML = bookmarkedImages.length
+    ? bookmarkedImages
+    : '<p>No bookmarked images</p>';
   bookmarkModal.classList.toggle('show');
 }
