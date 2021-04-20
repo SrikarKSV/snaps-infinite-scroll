@@ -69,6 +69,23 @@
     }
   }
 
+  &__error {
+    display: grid;
+    place-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--border-radius-lg);
+    display: none;
+
+    &.show {
+      display: grid;
+    }
+  }
+
   &__direction {
     .button {
       position: absolute;
@@ -97,6 +114,7 @@
 // Loading animation
 .modal {
   &__loading {
+    z-index: 9;
     position: absolute;
     width: 100%;
     height: 100%;

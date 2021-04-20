@@ -25,6 +25,7 @@ export default class Modal {
 
     // Selecting elements for filling up modal
     this.modalInner = this.modalContainer.querySelector('.modal__inner');
+    this.modalError = this.modalContainer.querySelector('.modal__error');
     this.modalImage = this.modalContainer.querySelector('.modal__image img');
     this.modalPhototgrapher = this.modalContainer.querySelector(
       '.modal__photographer'
@@ -101,12 +102,26 @@ export default class Modal {
     const { id } = object;
     this.modalLoading.classList.add('show');
     const image = await Image.fetchById(id);
-    this.allImages[this.index] = new Image(image);
+    if (image?.startsWith('💥 There')) {
+      this.allImages[this.index] = image;
+    } else {
+      this.allImages[this.index] = new Image(image);
+    }
     this.modalLoading.classList.remove('show');
   }
 
   _fillModal() {
     const object = this.allImages[this.index];
+    // Showing error
+    if (object?.startsWith('💥 There')) {
+      const error = `<p>${object}</p>`;
+      this.modalError.innerHTML = error;
+      this.modalError.classList.add('show');
+      return;
+    }
+    // Removing error div before filling modal
+    this.modalError.classList.remove('show');
+
     // No need to fetch the modal image as already loaded for gallery!
     this.modalImage.src = object.mediumLink;
     this.modalImage.alt = `Taken by ${object.photographer}`;
