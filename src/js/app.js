@@ -5,7 +5,7 @@ import {
   fetchQueryControl,
 } from './imageGallery';
 import { toggleBookmarkModal } from './bookmark';
-import { checkFetchError } from './lib/utils';
+import { checkFetchError, handleCloseModal } from './lib/utils';
 
 const searchForm = document.querySelector('.main__form form');
 const imgGrid = document.querySelector('.img-grid');
@@ -134,4 +134,17 @@ function toggleLoadingAnimation(state) {
   state === 'start' ? (imgGrid.innerHTML = '') : null;
   loading = !loading;
   loadingAnimation.classList.toggle('show');
+}
+
+// Info toggle
+const infoBtn = document.querySelector('.header__info');
+const infoModal = document.querySelector('.info');
+
+infoBtn.addEventListener('click', toggleInfo);
+infoModal.addEventListener('click', (e) =>
+  handleCloseModal(e, 'info__inner', infoModal)
+);
+
+function toggleInfo() {
+  infoModal.classList.toggle('show');
 }

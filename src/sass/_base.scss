@@ -16,6 +16,7 @@
   --border-radius-sm: 3px;
   --border-radius-lg: 5px;
   --query-control-bc: var(--white);
+  --social-icon-color: invert(100%);
 }
 
 .light-mode {
@@ -26,6 +27,7 @@
   --svg-fill-color: var(--black);
   --input-text-border: var(--black);
   --query-control-bc: #1f2932;
+  --social-icon-color: invert(0);
 }
 
 * {
