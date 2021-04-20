@@ -136,6 +136,15 @@ header,
     h1 {
       margin-bottom: 0;
     }
+
+    &__right {
+      button {
+        height: 38px;
+        width: 38px;
+      }
+
+      margin-bottom: 8px;
+    }
   }
 
   .main {
